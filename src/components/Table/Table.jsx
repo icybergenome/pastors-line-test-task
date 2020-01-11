@@ -2,8 +2,9 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import styles from './Table.module.scss';
 
-const TableElem = ({ tableData }) => {
+const TableElem = ({ tableData, onRowClick }) => {
   const headers = [];
   const tableRows = [];
 
@@ -31,9 +32,9 @@ const TableElem = ({ tableData }) => {
         </tr>
       </thead>
 
-      <tbody>
+      <tbody className={styles.tbody}>
         {tableRows.map((data, index) => (
-          <tr key={index}>
+          <tr key={index} onClick={() => onRowClick(data)}>
             {Object.keys(data).map((column, i) => (
               <td key={i}>{data[column]}</td>
             ))}
@@ -46,6 +47,7 @@ const TableElem = ({ tableData }) => {
 
 TableElem.propTypes = {
   tableData: PropTypes.array.isRequired,
+  onRowClick: PropTypes.func.isRequired,
 };
 
 export default TableElem;

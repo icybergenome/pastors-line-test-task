@@ -12,23 +12,26 @@ const ModalElem = ({
   forwardRef,
   handleCheck,
   evenCheck,
+  closeBtn,
 }) => {
   return (
     <Modal.Dialog onScroll={onScroll}>
       <Modal show={open} onHide={onClose}>
-        <Modal.Header ref={forwardRef}>
+        <Modal.Header ref={forwardRef} closeButton={closeBtn}>
           <Modal.Title>{headerText}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{children}</Modal.Body>
         <Modal.Footer className={styles.footer}>
-          <Form.Group controlId="footerCheckbox">
-            <Form.Check
-              type="checkbox"
-              label="Only even"
-              checked={evenCheck}
-              onChange={handleCheck}
-            />
-          </Form.Group>
+          {handleCheck && (
+            <Form.Group controlId="footerCheckbox">
+              <Form.Check
+                type="checkbox"
+                label="Only even"
+                checked={evenCheck}
+                onChange={handleCheck}
+              />
+            </Form.Group>
+          )}
         </Modal.Footer>
       </Modal>
     </Modal.Dialog>
@@ -38,18 +41,21 @@ const ModalElem = ({
 ModalElem.propTypes = {
   open: PropTypes.bool.isRequired,
   headerText: PropTypes.string,
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
   children: PropTypes.any.isRequired,
   onScroll: PropTypes.func,
   handleCheck: PropTypes.func,
   evenCheck: PropTypes.bool,
+  closeBtn: PropTypes.bool,
 };
 
 ModalElem.defaultProps = {
   headerText: 'Modal',
   onScroll: () => {},
-  handleCheck: () => {},
+  handleCheck: null,
   evenCheck: false,
+  onClose: () => {},
+  closeBtn: false,
 };
 
 export default ModalElem;

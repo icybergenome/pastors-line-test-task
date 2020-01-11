@@ -17,6 +17,7 @@ const Contacts = ({ contactTypes }) => {
   const [countryId, setCountryId] = useState();
   const [evenCheck, setEvenCheck] = useState(false);
   const [query, setQuery] = useState('');
+  const [details, setDetails] = useState();
 
   /* Redux State */
   const { contacts } = useSelector(state => getContactsState(state));
@@ -67,6 +68,22 @@ const Contacts = ({ contactTypes }) => {
   };
   const searchDebounce = debounce(handleSearch, 1000);
 
+  if (details) {
+    return (
+      <Modal
+        open
+        headerText="Contact Details"
+        onClose={() => setDetails()}
+        closeBtn
+      >
+        <div>
+          <div>{details.id}</div>
+          <div>{details.first_name}</div>
+          <div>{details.last_name}</div>
+        </div>
+      </Modal>
+    );
+  }
   return (
     <Modal
       open
@@ -95,7 +112,7 @@ const Contacts = ({ contactTypes }) => {
           onChange={e => searchDebounce(e.target.value)}
         />
       </Form.Group>
-      <Table tableData={contacts} />
+      <Table tableData={contacts} onRowClick={data => setDetails(data)} />
     </Modal>
   );
 };
