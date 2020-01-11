@@ -33,12 +33,11 @@ const parseContactsData = (contacts, existingData, even) => {
 const filterContactEven = contacts => {
   const data = contacts.filter(contact => contact.id.value % 2 === 0);
   return data;
-}
+};
 
 function* fetchContacts(action) {
   try {
     const state = yield select(getContactsState);
-    console.log('@@@@@', action, state.contacts);
     const data = yield call(getContacts, { ...action.payload });
     const { contacts } = data;
     const parsedData = parseContactsData(
