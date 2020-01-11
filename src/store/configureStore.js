@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from './reducers/rootReducer';
-import homeSaga from './sagas/home';
+import contactsSaga from './sagas/contacts';
 
 export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
@@ -14,7 +14,7 @@ export default function configureStore() {
     composeEnhancers(applyMiddleware(sagaMiddleware)),
   );
 
-  sagaMiddleware.run(homeSaga);
+  sagaMiddleware.run(contactsSaga);
 
   return store;
 }

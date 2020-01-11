@@ -1,4 +1,4 @@
-import { ActionTypes } from '../actions/home';
+import { ActionTypes } from '../actions/contacts';
 
 const initialState = {
   contacts: [],
