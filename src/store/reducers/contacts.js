@@ -1,10 +1,11 @@
-import { ActionTypes } from '../actions/home';
+import { ActionTypes } from '../actions/contacts';
 
 const initialState = {
   contacts: [],
   fetchContacts: false,
   fetchContactsSuccess: false,
   fetchContactsFailure: false,
+  filterEven: false,
 };
 
 export default (state = initialState, action) => {
@@ -30,6 +31,17 @@ export default (state = initialState, action) => {
         fetchContacts: false,
         fetchContactsSuccess: false,
         fetchContactsFailure: true,
+      };
+
+    case ActionTypes.RESET_DATA:
+      return {
+        ...initialState,
+      };
+
+    case ActionTypes.FILTER_EVEN:
+      return {
+        ...state,
+        filterEven: action.payload,
       };
 
     default:

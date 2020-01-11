@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv';
 import storeConfig from './store/configureStore';
 import { history } from './routing/history';
 import Routes from './routing/Routing';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 dotenv.config();
 
